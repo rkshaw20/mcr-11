@@ -4,7 +4,9 @@ import { dataInitialState, dataReducer } from "../reducer/DataReducer";
 
 
 const DataContext = createContext({
-    data: [],
+    movies: [],
+    appliedFilter:{},
+    starList:[]
     
   });
   
@@ -12,13 +14,12 @@ const DataContext = createContext({
   
   const DataContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(dataReducer, dataInitialState);
-  
-  console.log(state.data);
     return (
       <DataContext.Provider
         value={{
-          data: state.data,
-          
+          movies:state.movies,
+          appliedFilter:state.appliedFilter,
+          starList:state.starList,
           dispatch,
         }}
       >

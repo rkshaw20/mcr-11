@@ -9,31 +9,36 @@ import {
   Grid,
   theme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
 
-const router=createBrowserRouter([
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Movies from './pages/Movies';
+import WatchList from './pages/WatchList';
+import Starred from './pages/Starred';
+import MovieDetails from './pages/MovieDetails';
+import Layout from './components/Layout';
+
+const router = createBrowserRouter([
   {
-    path:'/',
-    element:<Home/>
-    // children:[
-    //   {index:true,element:<Dashboard/>},
-      // {path:'/departments',element:<Departments/>},
-    //  ]
-  }
-])
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Movies /> },
+      {
+        path: '/:movieId',
+        element: <MovieDetails />,
+      },
+      {
+        path: '/watchList',
+        element: <WatchList />,
+      },
+      { path: '/starred', element: <Starred /> },
+    ],
+  },
+]);
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <RouterProvider router={router}/>
-      {/* <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          
-        </Grid>
-      </Box> */}
+      <RouterProvider router={router} />
     </ChakraProvider>
   );
 }

@@ -13,8 +13,9 @@ root.render(
   <StrictMode>
     <DataContextProvider>
     <ColorModeScript />
-    </DataContextProvider>
     <App />
+
+    </DataContextProvider>
   </StrictMode>
 );
 
