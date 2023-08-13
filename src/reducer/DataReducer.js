@@ -1,11 +1,5 @@
 import { TYPE, movies } from '../utils/contant';
 
-// const updatedMovies = movies.map(movie => ({
-//   ...movie,
-//   starred: false,
-//   wishlist: false,
-// }));
-
 const setLocalMovies = localStorage.setItem(
   'movies',
   JSON.stringify(movies)
@@ -63,6 +57,14 @@ export const dataReducer = (state, action) => {
 return {...state,starList : updatedList};
     }
 
+    case TYPE.ADD_NEW_MOVIE: {
+      const updatedMovies = [...state.movies, action.payload];
+      localStorage.setItem('movies', JSON.stringify(updatedMovies));
+      return {
+          ...state,
+          movies: updatedMovies
+      };
+  }
     default:
       return state;
   }

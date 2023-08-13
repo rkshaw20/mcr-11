@@ -11,9 +11,11 @@ import {
   import { useState } from 'react';
   import { useDataContext } from '../context/DataContextProvider';
   import { useNavigate, } from 'react-router-dom';
+import { TYPE } from '../utils/contant';
   
   
   const AddNewMovie = () => {
+    const {dispatch}=useDataContext()
     const [movie, setMovie] = useState({
         title: "",
         summary: "",
@@ -28,13 +30,22 @@ import {
     
       const handleChange = (e) => {
         const { name, value } = e.target;
-        setMovie((prevMovie) => ({ ...prevMovie, [name]: value }));
+      
+        const formattedValue = (name === 'rating' || name === 'year') ? Number(value) : value;
+      
+        setMovie((prevMovie) => ({ ...prevMovie, [name]: formattedValue }));
       };
+      
     
       const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(movie);
-      };
+        const newMovie = {
+            ...movie,
+            id: Math.floor(Math.random() * 10000)
+        };
+    
+        dispatch({type: TYPE.ADD_NEW_MOVIE, payload: newMovie});
+    };
     
       return (
         <Flex  direction="column" w='50%' m={5} >
