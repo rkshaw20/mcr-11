@@ -4,9 +4,11 @@ import MovieCard from '../components/MovieCard';
 import { useEffect, useState } from 'react';
 import { getFilteredMovies } from '../utils/getFilteredMovies';
 import { TYPE } from '../utils/contant';
+import { useNavigate } from 'react-router-dom';
 
 const Movies = () => {
   const { movies,appliedFilter,dispatch } = useDataContext();
+  const navigate=useNavigate()
 
   const genres = [...new Set(movies.flatMap(({ genre }) => genre))];
 
@@ -25,7 +27,7 @@ const filteredMovies=getFilteredMovies(movies,appliedFilter);
 
   return (
     <Flex flexDir="column">
-      <Flex>
+      <Flex justifyContent='space-between' alignItems='center' >
         <Heading>Movies</Heading>
         <Select w='100px' m='.2rem'  name='genre' onChange={(e)=>handleFilter(e,TYPE.GENRE_FILTER)} >
           {genres.map((genre)=>(
@@ -47,7 +49,7 @@ const filteredMovies=getFilteredMovies(movies,appliedFilter);
           ))
          }
         </Select>
-        <Button>Add a Movie</Button>
+        <Button onClick={()=>navigate('/addNewMovie')} >Add a Movie</Button>
       </Flex>
       <Flex flexWrap='wrap' >
         {filteredMovies.length>0 ?  filteredMovies.map(movie => (

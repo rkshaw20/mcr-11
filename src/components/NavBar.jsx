@@ -25,16 +25,16 @@ const NavBar=()=>{
 
             </Flex>
          <Flex>
-            <Input type="search" placeholder="Search movies by titile cast and director... " w='350px' onChange={handleSearch} value={inputValue}
+            <Input type="search" placeholder="Search movies by titile cast and director... " w='350px' onChange={handleSearch} value={inputValue} bgColor='white'
              />
          </Flex>
-         <Flex justifyContent='space-between' alignItems='center' w='300px' >
+         <Flex justifyContent='space-around' alignItems='center' w='300px' >
             <Link as={ReachLink} to='/' >
             Movies
             </Link>
-            <Link as={ReachLink} to='/wishList' >
+            {/* <Link as={ReachLink} to='/wishList' >
             Wishlist
-            </Link>
+            </Link> */}
             <Link as={ReachLink} to='starred' >
             Starred Movies
             </Link>

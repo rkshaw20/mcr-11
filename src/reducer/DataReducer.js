@@ -12,11 +12,12 @@ const setLocalMovies = localStorage.setItem(
 );
 
 const getLocalMovies = JSON.parse(localStorage.getItem('movies'));
+const storedStarList = JSON.parse(localStorage.getItem('starList')) || [];
 
 export const dataInitialState = {
   movies: getLocalMovies,
   appliedFilter: { searchFilter: '',genreFilter:'',yearFilter:'',ratingFilter:'' },
-  starList:[]
+  starList:storedStarList,
 };
 
 export const dataReducer = (state, action) => {
@@ -57,7 +58,9 @@ export const dataReducer = (state, action) => {
     }
 
     case TYPE.REMOVE_FROM_STARLIST:{
-      const updatedList=[...state.starList,]
+      const updatedList=[...state.starList.filter(movie => movie.id !== action.payload)];
+      localStorage.setItem('starList', JSON.stringify(updatedList));
+return {...state,starList : updatedList};
     }
 
     default:

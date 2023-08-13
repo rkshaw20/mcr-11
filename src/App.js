@@ -16,6 +16,7 @@ import WatchList from './pages/WatchList';
 import Starred from './pages/Starred';
 import MovieDetails from './pages/MovieDetails';
 import Layout from './components/Layout';
+import AddNewMovie from './pages/AddNewMovie';
 
 const router = createBrowserRouter([
   {
@@ -28,8 +29,8 @@ const router = createBrowserRouter([
         element: <MovieDetails />,
       },
       {
-        path: '/watchList',
-        element: <WatchList />,
+        path: '/addNewMovie',
+        element: <AddNewMovie />,
       },
       { path: '/starred', element: <Starred /> },
     ],
